@@ -20,12 +20,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
+var MONGODB_URI = process.env.MONGODB_URI || "https://evening-crag-56827.herokuapp.com/";
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 app.use(method("_method"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
