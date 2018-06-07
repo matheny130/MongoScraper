@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #a8b89e;
+    height: 75px;
+}
+
+.nav-link, .navbar-brand {
+    color: black;
+}
+
+.navbar-brand {
+    font-family: 'Slabo 27px', serif;
+    font-size: 2.0rem;
+    padding: 10px;
+}
+
+.nav-link {
+    padding: 24px;
+    margin-left: 15px;
+}
+
+.navbar-collapse {
+    background-color: #a8b89e;
+}
+
+.btn-info {
+    margin: 15px;
+}
+
+/* JUMBOTRON */
+.jumbotron {
+    background: url(../images/travel.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.jumbotron-fluid {
+    height: 500px;
+}
+
+.jumbo-container {
+   text-align: center;
+   margin-top: 5%;
+}
+
+.display-4 {
+    color: #fff;
+    font-family: 'Slabo 27px', serif;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+/* CARDS */
+.card {
+    margin: 20px;
+}
+
+.card-header {
+    background-color: #a8b89e;
+    font-family: 'Slabo 27px', serif;
+}
+
+.mx-auto {
+    width: 65%;
+    display: block;
+}
+
+.btn-secondary {
+    margin: 15px;
+}
+.read-btn, .btn-dark, .btn-secondary {
+    width: 65%;
+    display: block;
+}
+
+/* MODAL */
+.modal-title {
+    font-family: 'Slabo 27px', serif;
+}
+
+.modal-header {
+    background-color: #a8b89e
+}
+
+h5 {
+    font-family: 'Slabo 27px', serif;
+}
+
+label {
+    font-family: 'Slabo 27px', serif;
+
+}
+

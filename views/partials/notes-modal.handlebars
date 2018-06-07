@@ -1,0 +1,36 @@
+<div class="modal" id="noteModal{{_id}}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notes for article: {{_id}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      {{#if note}}
+          <div class="card">
+            <div class="card-body">
+              {{note.body}}
+            </div>
+          </div>
+        {{else}}
+        <div class="card">
+            <div class="card-body">
+              There is not a note for this article
+            </div>
+          </div>
+        {{/if}}
+        <form>
+            <div class="form-group">
+                <label for="noteArea">New Note</label>
+                <textarea class="form-control" id="noteArea{{_id}}" rows="5"></textarea>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info save-note" data-id={{_id}} data-dismiss="modal">Save Note</button>
+      </div>
+    </div>
+  </div>
+  </div>

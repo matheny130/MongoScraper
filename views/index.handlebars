@@ -1,0 +1,18 @@
+{{#each articles}}
+<div class="card">
+  <h5 class="card-header">{{title}}</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <img class="mx-auto" src="{{imgLink}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col btn-row">
+        <a href={{link}} class="btn btn-info read-btn mx-auto">Read it!</a>
+        <button type="button" class="btn btn-dark mx-auto save" data-id={{this._id}}>Save Article</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
