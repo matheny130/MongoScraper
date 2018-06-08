@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/huffPostScraper";
+var MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);

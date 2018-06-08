@@ -6,12 +6,18 @@
 
 /* NAVBAR */
 .navbar {
-    background-color: #a8b89e;
+
     height: 75px;
 }
 
-.nav-link, .navbar-brand {
-    color: black;
+.nav-link, .navbar-brand, #scrapeBtn {
+    color: #fff;
+    font-family: 'Slabo 27px', serif;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 .navbar-brand {
@@ -25,9 +31,6 @@
     margin-left: 15px;
 }
 
-.navbar-collapse {
-    background-color: #a8b89e;
-}
 
 .btn-info {
     margin: 15px;
@@ -67,7 +70,7 @@
 }
 
 .card-header {
-    background-color: #a8b89e;
+    background-color: rgba(99, 92, 128, 0.533);
     font-family: 'Slabo 27px', serif;
 }
 
