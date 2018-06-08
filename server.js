@@ -1,18 +1,18 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var logger = require("morgan");
-var mongoose = require("mongoose");
-var exphbs = require("express-handlebars");
-var method = require("method-override");
+const express = require("express");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const exphbs = require("express-handlebars");
+const method = require("method-override");
 
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
-var db = require("./models");
+const db = require("./models");
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-var app = express();
+const app = express();
 
 
 app.use(logger("dev"));
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "https://evening-crag-56827.herokuapp.com/";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/huffPostScraper";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
@@ -151,7 +151,5 @@ app.post("/articles/delete/:id", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("App running on port " + PORT);
+  console.log("App running on port " + PORT + "!");
 });
-
-
