@@ -1,18 +1,18 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const logger = require("morgan");
-const mongoose = require("mongoose");
-const exphbs = require("express-handlebars");
-const method = require("method-override");
+var express = require("express");
+var bodyParser = require("body-parser");
+var logger = require("morgan");
+var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
+var method = require("method-override");
 
-const axios = require("axios");
-const cheerio = require("cheerio");
+var axios = require("axios");
+var cheerio = require("cheerio");
 
-const db = require("./models");
+var db = require("./models");
 
-const PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
-const app = express();
+var app = express();
 
 
 app.use(logger("dev"));
@@ -20,7 +20,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI;
+var database_URI = "mongodb://localhost/hpdb"
+var MONGODB_URI = "https://git.heroku.com/evening-crag-56827.git"
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+} else {
+  mongoose.connect(database_URI);
+}
+
+var connect = mongoose.connection;
+
+connect.on("error", function (err) {
+  console.log("Mongoose error: ", err)
+});
+
+connect.once("open", function () {
+  console.log("Mongoose connection successful");
+});
+
+
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
@@ -38,30 +56,32 @@ app.get("/", function (req, res) {
 
 //Scrape articles from huffpost and add to db
 app.get("/scrape", (req, res) => {
-  axios.get("https://www.huffingtonpost.com/section/world-news").then(function (response) {
-    var $ = cheerio.load(response.data);
+  request("https://www.huffingtonpost.com/section/world-news", function (error, response, html) {
+    var $ = cheerio.load(html);
 
     $(".card__headline__text").each(function (i, element) {
-      var result = {};
+      var title = $(element).children("a").text();
+      //var link = $(element).children("a").attr("href");
+      var imgLink = $(element).children("img").attr("src");
+      var link = "https://www.huffingtonpost.com" + $(element).children().attr("href")
+      //result.title = $(this).text();
+      //result.imgLink = $(this)
+        //.parent()
+        //.parent()
+        //.parent()
+        //.parent()
+        //.parent()
+        //.find("img").attr("src");
+      //result.link = "https://www.huffingtonpost.com" + $(this)
+        //.parent()
+        //.attr("href");
 
-      result.title = $(this).text();
-      result.imgLink = $(this)
-        .parent()
-        .parent()
-        .parent()
-        .parent()
-        .parent()
-        .find("img").attr("src");
-      result.link = "https://www.huffingtonpost.com" + $(this)
-        .parent()
-        .attr("href");
 
+      console.log("image: " + imgLink)
 
-      console.log("image: " + result.imgLink)
+      console.log("full result: " + element);
 
-      console.log("full result: " + result);
-
-      db.Article.create(result)
+      db.Article.create(element)
         .then(function (dbArticle) {
           console.log(dbArticle);
         })

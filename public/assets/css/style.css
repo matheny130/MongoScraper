@@ -2,12 +2,16 @@
     box-sizing: border-box;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+
+}
+
+body {
+    background-color: #323331;
 }
 
 /* NAVBAR */
 .navbar {
-
-    height: 75px;
+        height: 75px;
 }
 
 .nav-link, .navbar-brand, #scrapeBtn {
@@ -30,6 +34,11 @@
     padding: 24px;
     margin-left: 15px;
 }
+
+#scrapeBtn {
+    padding: 23px;
+}
+
 
 
 .btn-info {
@@ -67,6 +76,7 @@
 /* CARDS */
 .card {
     margin: 20px;
+    background-color: #a8b89e;
 }
 
 .card-header {
