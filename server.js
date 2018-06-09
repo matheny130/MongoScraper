@@ -4,8 +4,8 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var method = require("method-override");
+var request = require("request");
 
-var axios = require("axios");
 var cheerio = require("cheerio");
 
 var db = require("./models");
