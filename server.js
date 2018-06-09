@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 var database_URI = "mongodb://localhost/hpdb"
-var MONGODB_URI = "https://git.heroku.com/evening-crag-56827.git"
+var MONGODB_URI = "mongodb://www.heroku.com/evening-crag-56827.git"
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI)
 } else {
