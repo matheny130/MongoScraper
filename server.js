@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-var database_URI = "mongodb://localhost/hpdb";
+var database_URI = "mongodb://localhost/huffingtonpostdb";
 var MONGODB_URI = "mongodb://heroku_4h7chpn2:mifgbuer667g6ik257qr8hr8l3@ds247170.mlab.com:47170/heroku_4h7chpn2";
 if (process.env.MONGODB_URI) {
  mongoose.connect(process.env.MONGODB_URI)
@@ -58,7 +58,7 @@ app.get("/", function (req, res) {
 app.get("/scrape", (req, res) => {
   axios.get("https://www.huffingtonpost.com/section/world-news").then(function(response) {
 
-    var $ = cheerio.load(response);
+    var $ = cheerio.load(response.data);
 
     $(".card__headline__text").each(function (i, element) {
 
@@ -81,11 +81,11 @@ app.get("/scrape", (req, res) => {
         .attr("href");
 
 
-      console.log("image: " + imgLink)
+      console.log("image: " + result.imgLink)
 
-      console.log("full result: " + element);
+      console.log("full result: " + result);
 
-      db.Article.create(element)
+      db.Article.create(result)
         .then(function (dbArticle) {
           console.log(dbArticle);
         })
