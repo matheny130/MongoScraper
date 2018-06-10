@@ -41,20 +41,20 @@ connect.once("open", function () {
 
 
 mongoose.Promise = Promise;
-//mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI);
 
 app.use(method("_method"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-//Display handlebars main page
+
 app.get("/", function (req, res) {
   db.Article.find({}, null, { sort: { created: -1 } }, function (err, data) {
     res.render("index", { articles: data });
   })
 });
 
-//Scrape articles from huffpost and add to db
+
 app.get("/scrape", (req, res) => {
   axios.get("https://www.huffingtonpost.com/section/world-news").then(function(response) {
 
@@ -98,7 +98,7 @@ app.get("/scrape", (req, res) => {
   });
 });
 
-//Grab all articles
+
 app.get("/articles", (req, res) => {
   db.Article.find({})
     .then((dbArticle) => {
@@ -109,7 +109,7 @@ app.get("/articles", (req, res) => {
     });
 });
 
-//Grab only the saved articles
+
 app.get("/saved", (req, res) => {
   db.Article.find({ "read": true })
     .populate("note")
@@ -122,7 +122,7 @@ app.get("/saved", (req, res) => {
     });
 });
 
-//Get an article by its specific ID, populate it with a note
+
 app.get("/articles/:id", (req, res) => {
   db.Article.findOne({ _id: req.params.id })
     .populate("note")
@@ -134,7 +134,7 @@ app.get("/articles/:id", (req, res) => {
     });
 });
 
-//Save a note for an article
+
 app.post("/articles/:id", (req, res) => {
   db.Note.create(req.body)
     .then(function (dbNote) {
@@ -148,7 +148,7 @@ app.post("/articles/:id", (req, res) => {
     });
 });
 
-//Save an ID
+
 app.post("/articles/save/:id", (req, res) => {
   db.Article.findOneAndUpdate({ "_id": req.params.id }, { "read": true })
     .exec((err, doc) => {
@@ -161,7 +161,7 @@ app.post("/articles/save/:id", (req, res) => {
     });
 });
 
-//Delete an article from saved
+
 app.post("/articles/delete/:id", (req, res) => {
   db.Article.findOneAndUpdate({ "_id": req.params.id }, { "read": false })
     .exec((err, doc) => {
