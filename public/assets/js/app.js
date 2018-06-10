@@ -52,7 +52,7 @@ $(".save-note").on("click", function () {
     }
   }).then(function (data) {
     console.log(data)
-    $("#noteArea").val('');
+    $("#noteArea").val("");
     window.location = "/saved"
   })
 })

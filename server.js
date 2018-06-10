@@ -4,8 +4,8 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 var method = require("method-override");
-var request = require("request");
-
+//var request = require("request");
+var axios = require("axios");
 var cheerio = require("cheerio");
 
 var db = require("./models");
@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 var database_URI = "mongodb://localhost/hpdb";
-var MONGODB_URI = "mongodb://heroku_4h7chpn2:mifgbuer667g6ik257qr8hr8l3@ds247170.mlab.com:47170/heroku_4h7chpn2";
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI)
-} else {
+//var MONGODB_URI = "mongodb://heroku_4h7chpn2:mifgbuer667g6ik257qr8hr8l3@ds247170.mlab.com:47170/heroku_4h7chpn2";
+//if (process.env.MONGODB_URI) {
+ // mongoose.connect(process.env.MONGODB_URI)
+//} else {
   mongoose.connect(database_URI);
-}
+//}
 
 var connect = mongoose.connection;
 
@@ -41,7 +41,7 @@ connect.once("open", function () {
 
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+//mongoose.connect(MONGODB_URI);
 
 app.use(method("_method"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -56,25 +56,29 @@ app.get("/", function (req, res) {
 
 //Scrape articles from huffpost and add to db
 app.get("/scrape", (req, res) => {
-  request("https://www.huffingtonpost.com/section/world-news", function (error, response, html) {
-    var $ = cheerio.load(html);
+  axios.get("https://www.huffingtonpost.com/section/world-news").then(function(response) {
+
+    var $ = cheerio.load(response);
 
     $(".card__headline__text").each(function (i, element) {
-      var title = $(element).children("a").text();
+
+      var result = {};
+
+      //result.title = $(this).children("a").text();
       //var link = $(element).children("a").attr("href");
-      var imgLink = $(element).children("img").attr("src");
-      var link = "https://www.huffingtonpost.com" + $(element).children().attr("href")
-      //result.title = $(this).text();
-      //result.imgLink = $(this)
-        //.parent()
-        //.parent()
-        //.parent()
-        //.parent()
-        //.parent()
-        //.find("img").attr("src");
-      //result.link = "https://www.huffingtonpost.com" + $(this)
-        //.parent()
-        //.attr("href");
+      //var result.imgLink = $(element).children("img").attr("src");
+      //var result.link = "https://www.huffingtonpost.com" + $(element).children().attr("href")
+      result.title = $(this).text();
+      result.imgLink = $(this)
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .find("img").attr("src");
+      result.link = "https://www.huffingtonpost.com" + $(this)
+        .parent()
+        .attr("href");
 
 
       console.log("image: " + imgLink)
