@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 var database_URI = "mongodb://localhost/hpdb";
-//var MONGODB_URI = "mongodb://heroku_4h7chpn2:mifgbuer667g6ik257qr8hr8l3@ds247170.mlab.com:47170/heroku_4h7chpn2";
-//if (process.env.MONGODB_URI) {
- // mongoose.connect(process.env.MONGODB_URI)
-//} else {
+var MONGODB_URI = "mongodb://heroku_4h7chpn2:mifgbuer667g6ik257qr8hr8l3@ds247170.mlab.com:47170/heroku_4h7chpn2";
+if (process.env.MONGODB_URI) {
+ mongoose.connect(process.env.MONGODB_URI)
+} else {
   mongoose.connect(database_URI);
-//}
+}
 
 var connect = mongoose.connection;
 
