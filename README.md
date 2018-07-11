@@ -15,5 +15,5 @@ An application that allows the user to scrape articles from the Huffington Post 
 **Saved Article Note**
 ![](/assets/images/savednote.jpg)
 
-**Delete from Saved Article**
+**Delete from Saved Articles**
 ![](/assets/images/delete.jpg)
